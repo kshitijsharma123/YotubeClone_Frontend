@@ -2,14 +2,35 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 function Login() {
+  const checkPassword = () => {
+    const password = getValues("password");
+    const confrimPassword = getValues("confirmPassword");
+    if (password !== confrimPassword) {
+      setError("root", {
+        message: "Confrim Password and Password dont match",
+      });
+    }
+  };
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    getValues,
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000);
+      });
+      console.log(data);
+    } catch (error) {
+      setError("email", {
+        message: "This email is already taken",
+      });
+    }
   };
   return (
     <>
@@ -52,8 +73,10 @@ function Login() {
             className="mb-4 text-black"
           />
           {/* Email  */}
-          {errors.email &&(
-          <span className="text-red-900">{errors.email.message}</span>)}
+
+          {errors.email && (
+            <span className="text-red-900">{errors.email.message}</span>
+          )}
 
           <label htmlFor="email" className="text-white">
             Email
@@ -61,7 +84,12 @@ function Login() {
           <input
             {...register("email", {
               required: "Email is required",
-              validate: (value) => value.includes("@"),
+              validate: (value) => {
+                if (!value.includes("@")) {
+                  return "Email must have @";
+                }
+                return true;
+              },
             })}
             type="text"
             id="email"
@@ -69,9 +97,52 @@ function Login() {
             className="mb-4 text-black"
           />
 
-          <button className="bg-red-900" type="submit">
-            Submit
+          {/* Password  */}
+          {errors.password && (
+            <span className="text-red-900">{errors.password.message}</span>
+          )}
+
+          <label htmlFor="password" className="text-white">
+            Password
+          </label>
+          <input
+            {...register("password", {
+              required: "Password is required",
+            })}
+            onBlur={checkPassword}
+            type="password"
+            id="password"
+            placeholder="password"
+            className="mb-4 text-black"
+          />
+
+          {/* Confrim Password  */}
+          {errors.ConfrimPassword && (
+            <span className="text-red-900">
+              {errors.ConfrimPassword.message}
+            </span>
+          )}
+
+          <label htmlFor="confirmpassword" className="text-white">
+            Confrim Password
+          </label>
+          <input
+            {...register("ConfrimPassword", {
+              required: "Password is required",
+            })}
+            onBlur={checkPassword}
+            type="password"
+            id="confirmPassword"
+            placeholder="password"
+            className="mb-4 text-black"
+          />
+
+          <button disabled={isSubmitting} className="bg-red-900" type="submit">
+            {isSubmitting ? "loading..." : "Submit"}
           </button>
+          {errors.root && (
+            <span className="text-red-900"> {errors.root.message}</span>
+          )}
         </form>
       </div>
     </>
