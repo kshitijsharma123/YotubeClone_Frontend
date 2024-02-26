@@ -38,7 +38,12 @@ function Navbar() {
           />
         </div>
         <div className="ml-7 mr-4">
-          <DropdownMenu avatar="https://images.pexels.com/photos/20175173/pexels-photo-20175173/free-photo-of-a-woman-standing-on-the-beach-with-her-arms-outstretched.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" name="Charli Ji" username="cool342" isLogged={true} />
+          <DropdownMenu
+            avatar="https://images.pexels.com/photos/20175173/pexels-photo-20175173/free-photo-of-a-woman-standing-on-the-beach-with-her-arms-outstretched.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            name="Charli Ji"
+            username="cool342"
+            isLogged={false}
+          />
         </div>
       </div>
     </nav>

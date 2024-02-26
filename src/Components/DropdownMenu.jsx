@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function DropdownMenu(props) {
+  const { avatar, isLogged, name, username } = props;
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -10,11 +12,19 @@ function DropdownMenu(props) {
           onClick={() => setIsOpen(true)}
           className="flex items-center px-2 py-2 text-white rounded-full focus:outline-none"
         >
-          <img
-            src={props.avatar}
-            alt="profile"
-            className="h-10 w-10 rounded-full"
-          />
+          {isLogged ? (
+            <img
+              src={avatar}
+              alt="profile"
+              className="h-10 w-10 rounded-full"
+            />
+          ) : (
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShg4U3gB48ZkiCXqC-TIgxH5yPgxMmAtJJMQEU_L8tzY2meTG2eVMzoz-t_5UH95fUXB8&usqp=CAU"
+              alt="profile"
+              className="h-10 w-10 rounded-full"
+            />
+          )}
         </button>
 
         {isOpen && (
@@ -23,30 +33,48 @@ function DropdownMenu(props) {
             className="origin-top-right absolute right-3 mt-2 w-48  shadow-lge ring-1 ring-black ring-opacity-5  bg-white rounded-lg text-black"
           >
             <div className="flex justify-start m-2">
-              <img
-                src={props.avatar}
-                alt="profilePhoto"
-                className="h-10 w-10 rounded-full"
-              />
-              <div className="ml-5 ">
-                <h4 className="font-medium">{props.name}</h4>
-                <h3 className="font-normal">{props.username}</h3>
-              </div>
+              {isLogged ? (
+                <>
+                  <img
+                    src={avatar}
+                    alt="profilePhoto"
+                    className="h-10 w-10 rounded-full"
+                  />
+                  <div className="ml-5 ">
+                    <h4 className="font-medium">{name}</h4>
+                    <h3 className="font-normal">{username}</h3>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <img
+                    src={
+                      "https://static.vecteezy.com/system/resources/thumbnails/020/911/740/small/user-profile-icon-profile-avatar-user-icon-male-icon-face-icon-profile-icon-free-png.png"
+                    }
+                    alt="profilePhoto"
+                    className="h-10 w-10 rounded-full"
+                  />
+                  <div className="ml-5 ">
+                    <h4 className="font-medium">Name</h4>
+                    <h3 className="font-normal">Username</h3>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="bg-black h-0.5 w-full rounded-xl"></div>
 
             <div className="flex justify-start m-2 ">
-              {props.isLogged ? (
+              {isLogged ? (
                 <>
                   <img
                     src="https://cdn4.iconfinder.com/data/icons/navigation-40/24/exit-512.png"
                     alt="logout Icon"
                     className="h-6 w-6 mr-10"
                   />
-                  <a className="font-bold " href="#">
+                  <Link className="font-bold " to="/logout">
                     Logout
-                  </a>
+                  </Link>
                 </>
               ) : (
                 <>
@@ -54,11 +82,10 @@ function DropdownMenu(props) {
                     src="https://banner2.cleanpng.com/20180516/zq/kisspng-computer-icons-google-account-icon-design-login-5afc02dab4a218.0950785215264652427399.jpg"
                     alt="Login Icon"
                     className=" h-6 w-7 mr-10"
-                  >
-                  <a className="font-bold" href="#">
+                  ></img>
+                  <Link className="font-bold" to="/login">
                     Login
-                  </a>
-                  </img>
+                  </Link>
                 </>
               )}
             </div>
