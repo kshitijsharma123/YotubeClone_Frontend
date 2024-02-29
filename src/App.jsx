@@ -4,10 +4,12 @@ import Header from "./Header/Header";
 
 function App() {
   return (
-    <div className="h-screen bg-black bg-opacity-90">
-      <Header />
-      <HomePage />
-    </div>
+
+      <div className="h-screen bg-black bg-opacity-90">
+        <Header />
+        <HomePage />
+      </div>
+   
   );
 }
 

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, redirect, useRouteLoaderData } from "react-router-dom";
+import userDataContext from "../context/userContext";
 
 function Login() {
+
+  const { login, user } = useContext(userDataContext)
   const {
     register,
     handleSubmit,
@@ -11,18 +14,28 @@ function Login() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
+    const { data, password } = formData
     try {
-      await new Promise((resolve) => {
-        setTimeout(resolve, 1000);
-      });
-      console.log(data);
-    } catch (error) {
-      setError("roor", {
-        message: "This email is already taken",
-      });
+      await login(data, password)
+
+    } catch (err) {
+
     }
+
   };
+
+  useEffect(() => {
+
+    if (user.islogged === false) {
+      setError("root", {
+        message: user.message
+      })
+    } else {
+      window.location.href = "/"
+    }
+  }, [user])
+
   return (
     <>
       <div className="h-screen bg-black bg-opacity-90 flex justify-center items-center flex-col ">
@@ -69,6 +82,9 @@ function Login() {
             className="mb-4 text-black h-7 w-64 rounded-lg p-1"
           />
 
+          {errors.root && (
+            <span className="text-red-900 mb-4"> {errors.root.message}</span>
+          )}
           <button
             disabled={isSubmitting}
             className="bg-red-800  h-7 w-64 rounded-lg hover:bg-red-600"
@@ -90,9 +106,6 @@ function Login() {
               Register
             </Link>
           </div>
-          {errors.root && (
-            <span className="text-red-900"> {errors.root.message}</span>
-          )}
         </form>
       </div>
     </>
