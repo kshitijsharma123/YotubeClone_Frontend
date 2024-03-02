@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, redirect, useRouteLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import userDataContext from "../context/userContext";
 
 function Login() {
 
-  const { login, user } = useContext(userDataContext)
+  const { login, userStatus } = useContext(userDataContext)
   const {
     register,
     handleSubmit,
@@ -13,6 +13,7 @@ function Login() {
 
     formState: { errors, isSubmitting },
   } = useForm();
+
 
   const onSubmit = async (formData) => {
     const { data, password } = formData
@@ -27,14 +28,14 @@ function Login() {
 
   useEffect(() => {
 
-    if (user.islogged === false) {
+    if (userStatus.islogged === false) {
       setError("root", {
-        message: user.message
+        message: userStatus.message
       })
     } else {
       window.location.href = "/"
     }
-  }, [user])
+  }, [userStatus])
 
   return (
     <>
