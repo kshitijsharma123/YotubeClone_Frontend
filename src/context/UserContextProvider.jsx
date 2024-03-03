@@ -100,6 +100,10 @@ export const UserContextProvider = ({ children }) => {
         }
     }
 
+    const searchVideo = async () => {
+
+    }
+
     return (
         <userDataContext.Provider value={{
             login,
@@ -107,7 +111,8 @@ export const UserContextProvider = ({ children }) => {
             getUser
             , user,
             logout,
-            logoutStatus
+            logoutStatus,
+            searchVideo
         }}>
             {children}
         </userDataContext.Provider >

@@ -61,7 +61,7 @@ function Login() {
             type="text"
             id="Data"
             placeholder="Username or Email"
-            className="mb-4 text-black h-7 w-64 rounded-lg p-1  
+            className="mb-4 text-black h-7 w-64 rounded-lg p-1 focus:outline-none focus:border-2 focus:border-red-600
             "
           />
 
@@ -80,7 +80,7 @@ function Login() {
             type="password"
             id="password"
             placeholder="Password"
-            className="mb-4 text-black h-7 w-64 rounded-lg p-1"
+            className="mb-4 text-black h-7 w-64 rounded-lg p-1 focus:outline-none focus:border-2 focus:border-red-600"
           />
 
           {errors.root && (

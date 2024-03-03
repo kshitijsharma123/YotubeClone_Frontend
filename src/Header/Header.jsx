@@ -1,6 +1,7 @@
 import React from "react";
 
 import DropdownMenu from "../Components/DropdownMenu";
+import Searchbar from "../Components/Searchbar";
 
 function Navbar() {
   return (
@@ -18,7 +19,7 @@ function Navbar() {
         <h1 className="font-semibold text-xl">YouTube</h1>
       </div>
 
-      <div>Search Component</div>
+      <div className="mt-2"><Searchbar /></div>
 
       <div className="mr-2 ml-2  flex justify-between items-center">
         <div className="mr-2 ml-2">
