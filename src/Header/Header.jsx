@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import DropdownMenu from "../Components/DropdownMenu";
 import Searchbar from "../Components/Searchbar";
@@ -9,15 +10,17 @@ function Navbar() {
       className="h-14 w-full  flex justify-between items-center text-white
   "
     >
-      <div className="ml-2 mr-2  flex justify-start items-center">
-        <img
-          src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
-          alt="youtubeLogo"
-          srcset=""
-          className="h-6 w-full mr-1"
-        />
-        <h1 className="font-semibold text-xl">YouTube</h1>
-      </div>
+      <Link to="/">
+        <div className="ml-2 mr-2  flex justify-start items-center">
+          <img
+            src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
+            alt="youtubeLogo"
+            srcset=""
+            className="h-6 w-full mr-1"
+          />
+          <h1 className="font-semibold text-xl">YouTube</h1>
+        </div>
+      </Link>
 
       <div className="mt-2"><Searchbar /></div>
 
