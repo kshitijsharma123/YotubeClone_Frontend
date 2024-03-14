@@ -12,6 +12,7 @@ import Register from "./Components/Register.jsx";
 import { UserContextProvider } from "./context/UserContextProvider";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import SeachVideos from "./Components/SeachVideos.jsx";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +39,9 @@ const router = createBrowserRouter([
     path: "/video/:videoId",
     element: <VidoPlayer />
 
+  }, {
+    path: "/search/:title",
+    element: <SeachVideos />
   }
 ]);
 

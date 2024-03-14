@@ -18,10 +18,10 @@ function Logout() {
   };
 
   useEffect(() => {
-    console.log("Running");
+    
     if (logoutStatus === true) {
       window.location.href = "/";
-      console.log("Running in Logout==true");
+     
     }
   }, [logoutStatus]);
 
@@ -30,7 +30,7 @@ function Logout() {
   };
 
   return (
-    <div className='h-screen w-full bg-black opacity-90'>
+    <div >
       <div className="flex h-screen justify-center">
         <div className="h-32 w-96 p-2 m-4 font-seminormal">
           <h1 className='text-3xl text-white'>Want to Logout?</h1>

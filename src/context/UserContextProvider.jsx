@@ -18,7 +18,7 @@ export const UserContextProvider = ({ children }) => {
         coverImage: "",
         fullName: "",
         username: ""
-    })
+    }) 
 
     const [logoutStatus, setlogoutStatus] = useState()
 

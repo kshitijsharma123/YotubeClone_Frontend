@@ -9,10 +9,8 @@ function VidoPlayer() {
 
     return (
         <>
-            <div className="h-screen bg-black bg-opacity-90">
-                <Headers />
-                <h1 className='text-2xl text-white'>Video id {videoId}</h1>
-            </div>
+            <Headers />
+            <h1 className='text-2xl text-white'>Video id {videoId}</h1>
         </>
     )
 }

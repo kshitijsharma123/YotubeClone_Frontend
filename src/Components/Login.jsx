@@ -39,7 +39,7 @@ function Login() {
 
   return (
     <>
-      <div className="h-screen bg-black bg-opacity-90 flex justify-center items-center flex-col ">
+      <div className="h-screen flex justify-center items-center flex-col ">
         <h1 className="font-bold text-white m-8">Login</h1>
 
         <form

@@ -4,15 +4,15 @@ import Header from "./Header/Header";
 
 function App() {
   return (
-
-    <div className="h-screen bg-black bg-opacity-90">
+    <>
       <Header />
-     <div className="h-12 w-full"></div>
-     
+      <div className="h-12 w-full"></div>
+
       <div >
         <HomePage />
+       
       </div>
-    </div>
+    </>
 
   );
 }

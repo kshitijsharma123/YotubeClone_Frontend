@@ -29,18 +29,18 @@ function HomePage() {
     return <LoadingCircle />
   }
 
-  const videoid = [1, 2, 3, 4, 5, 6]
+ 
   return (
     <>
       <div className="flex flex-wrap gap-4 items-start  ">
         {data.map((v) => (
-          <h1 className="text-white text-2xl" key={v._id}>
+          <div className="text-white text-2xl" key={v._id}>
             <Link to={`/video/${v._id}`} >
               <VideoCard title={v.title}
                 username={v.owner.username} thumbnail={v.thumbnail} channelImage={v.owner.avatar} />
             </Link>
 
-          </h1>
+          </div>
         ))}
       </div>
     </>

@@ -12,7 +12,7 @@ function Register() {
 
   return (
     <>
-      <div className="h-screen bg-black bg-opacity-90 flex  items-center flex-col ">
+      <div className="h-screen flex  items-center flex-col ">
         <h1 className="font-bold text-2xl text-white m-8">Registration</h1>
         <form className="flex flex-col text-white font-semibold" >
           <label htmlFor="Email" className=" ml-1 mb-1">

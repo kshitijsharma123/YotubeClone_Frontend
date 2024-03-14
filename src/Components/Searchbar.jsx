@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import SearchResult from "./SearchResult";
+import { Link } from "react-router-dom";
 export default function Searchbar() {
     const [input, setInput] = useState("");
     const [result, setResult] = useState([])
@@ -43,10 +44,12 @@ export default function Searchbar() {
                     placeholder='Search'
                     className='h-10 w-72 p-2 rounded-l-xl focus:outline-none font-semibold bg-stone-700'
                 />
-                <IoSearchOutline
-                    className="h-10 w-10 p-1.5 bg-stone-800 rounded-r-xl border-1 hover:bg-stone-500"
-                    onClick={submit}
-                />
+                <Link to={`/search/${input}`}>
+                    <IoSearchOutline
+                        className="h-10 w-10 p-1.5 bg-stone-800 rounded-r-xl border-1 hover:bg-stone-500"
+                       
+                    />
+                </Link>
             </div>
             <SearchResult result={result} />
         </>
