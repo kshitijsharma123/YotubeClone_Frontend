@@ -8,17 +8,19 @@ export const UserContextProvider = ({ children }) => {
 
     const [userStatus, setUserStatus] = useState(
         {
+            isRegistered: Boolean,
             islogged: false,
-            message: "",
+            message: String,
 
         })
+
     const [user, setUser] = useState({
         islogged: false,
         avatar: "",
         coverImage: "",
         fullName: "",
         username: ""
-    }) 
+    })
 
     const [logoutStatus, setlogoutStatus] = useState()
 
@@ -52,6 +54,55 @@ export const UserContextProvider = ({ children }) => {
             }
         }
     }
+
+
+
+    // This is quick fix have to refactor the code later
+    const registration = async (fullName, email, username, password, avatar, coverImage) => {
+        try {
+            const formData = new FormData();
+            formData.append('fullName', fullName);
+            formData.append('email', email);
+            formData.append('username', username);
+            formData.append('password', password);
+            formData.append('avatar', avatar[0]);
+            formData.append('coverImage', coverImage[0]);
+
+            const requestOptions = {
+                method: 'POST',
+                body: formData,
+                redirect: 'follow',
+                credentials: 'include',
+            };
+
+            const response = await fetch('http://localhost:8000/api/v1/users/register', requestOptions);
+
+            if (!response.ok) {
+                if (response.status === 500) {
+                    throw new Error("Avatar is requried")
+                }
+                else if (response.status === 409) {
+                    throw new Error(" The User already exits")
+                }
+                else if (response.status === 400) {
+                    throw new Error("Avatar is required")
+                }
+            }
+
+            setUserStatus({
+                isRegistered: true,
+                message: 'Success',
+            });
+
+
+        } catch (error) {
+            setUserStatus({
+                isRegistered: false,
+                message: error.message
+            })
+        }
+    };
+
 
     const getUser = async () => {
 
@@ -100,9 +151,8 @@ export const UserContextProvider = ({ children }) => {
         }
     }
 
-    const searchVideo = async () => {
 
-    }
+
 
     return (
         <userDataContext.Provider value={{
@@ -112,7 +162,7 @@ export const UserContextProvider = ({ children }) => {
             , user,
             logout,
             logoutStatus,
-            searchVideo
+            registration
         }}>
             {children}
         </userDataContext.Provider >

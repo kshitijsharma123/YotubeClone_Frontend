@@ -10,12 +10,12 @@ function VideoCard(props) {
     <>
 
 
-      <div className="  h-60 w-100 rounded-xl flex flex-col ">
-        <div id="thumbnail">
+      <div className="  h-60 w-100 rounded-xl flex flex-col mb-3 ">
+        <div id="thumbnail" >
           <img 
             src={thumbnail}
             alt="thumbnail"
-            className="rounded-xl h-48 w-96 hover:scale-105 transition-transform duration-300" 
+            className="rounded-xl h-48 object-cover w-96 hover:scale-105 transition-transform duration-300" 
             
             onError={(e) => {
               e.target.src = ""

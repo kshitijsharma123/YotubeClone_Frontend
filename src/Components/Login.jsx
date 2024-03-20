@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userDataContext from "../context/userContext";
 
 function Login() {
+
+  const redirect = useNavigate()
 
   const { login, userStatus } = useContext(userDataContext)
   const {
@@ -33,7 +35,7 @@ function Login() {
         message: userStatus.message
       })
     } else {
-      window.location.href = "/"
+      redirect("/")
     }
   }, [userStatus])
 

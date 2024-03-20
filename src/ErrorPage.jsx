@@ -7,7 +7,7 @@ function ErrorPage() {
     <>
       <Headers />
       <div className="h-screen flex justify-center text-center">
-        <div>
+        <div className="text-white">
           <h1 className="font-bold">Oops!</h1>
           <p className="font-medium">
             Sorry, an unexpected error has occurred.

@@ -10,7 +10,7 @@ function Navbar() {
       className="h-14 w-full  flex justify-between items-center text-white
   "
     >
-      <Link to="/">
+      <a href="/">
         <div className="ml-2 mr-2  flex justify-start items-center">
           <img
             src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
@@ -20,7 +20,7 @@ function Navbar() {
           />
           <h1 className="font-semibold text-xl">YouTube</h1>
         </div>
-      </Link>
+      </a>
 
       <div className="mt-2"><Searchbar /></div>
 

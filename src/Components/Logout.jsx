@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import userDataContext from '../context/userContext';
+import { useNavigate } from "react-router-dom";
 
 function Logout() {
+  const redirect = useNavigate()
   const { logout, logoutStatus } = useContext(userDataContext);
   const [isLoading, setIsLoading] = useState(false);
 
   const onLogout = async () => {
     try {
-    
+
       setIsLoading(true);
       await logout();
     } catch (error) {
@@ -18,15 +20,15 @@ function Logout() {
   };
 
   useEffect(() => {
-    
+
     if (logoutStatus === true) {
-      window.location.href = "/";
-     
+      window.location.href = "/"
+
     }
   }, [logoutStatus]);
 
   const redirectHome = () => {
-    window.location.href = "/";
+    redirect("/")
   };
 
   return (

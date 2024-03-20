@@ -19,7 +19,7 @@ function HomePage() {
 
   const { data, isLoading } = useQuery({
     queryFn: () => getVideos()
-    , queryKey: ["Video"],
+    , queryKey: ["videoCard"],
     initialPageParam: 0,
 
   })
