@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import userDataContext from "../context/userContext";
 
 function DropdownMenu() {
-  const { getUser,user } = useContext(userDataContext)
+  const { getUser, user } = useContext(userDataContext);
 
   useEffect(() => {
     try {
@@ -11,16 +11,14 @@ function DropdownMenu() {
     } catch (error) {
       console.error("Error fetching user:", error);
     }
-  }, [])
-  const  {avatar, islogged, fullName, username} =user
-  
-
+  }, []);
+  const { avatar, islogged, fullName, username } = user;
 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <div >
+      <div>
         <button
           onClick={() => setIsOpen(true)}
           className="flex items-center px-2 py-2 text-white rounded-full focus:outline-none"
@@ -29,7 +27,7 @@ function DropdownMenu() {
             <img
               src={avatar}
               alt="profile"
-              className="h-10 w-10 rounded-full"
+              className="h-10 w-10 rounded-full object-cover"
             />
           ) : (
             <img
@@ -51,11 +49,15 @@ function DropdownMenu() {
                   <img
                     src={avatar}
                     alt="profilePhoto"
-                    className="h-10 w-10 rounded-full"
+                    className="h-10 w-10 rounded-full object-cover"
                   />
                   <div className="ml-5 ">
                     <h4 className="font-medium">{fullName}</h4>
-                    <h3 className="font-normal">{username}</h3>
+                    <Link to={`/my-profile`}>
+                      <h3 className="font-normal hover:text-red-600 hover:font-semibold">
+                        {username}
+                      </h3>
+                    </Link>
                   </div>
                 </>
               ) : (

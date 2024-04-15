@@ -2,3 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .w-99-percent {
+      width: 98%;
+    }
+  }

@@ -3,12 +3,12 @@ import Headers from './../Header/Header';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Link} from "react-router-dom"
-import VideoCard from './VideoCard';
+import VideoCard from './VIdeoCard';
 
 function SeachVideos() {
   const [videos, setVideos] = useState([]);
   const { title } = useParams();
-  console.log(title);
+  
 
   const fetchData = async (e) => {
     try {
