@@ -4,7 +4,7 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import setCanvasPreview from "../setCanvasPreview";
+import setCanvasPreview from "../utils/setCanvasPreview";
 function Test() {
   const [imgSrc, setImgSrc] = useState("");
   const [crop, setCrop] = useState();

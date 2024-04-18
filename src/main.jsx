@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import ErrorPage from "./ErrorPage.jsx";
-
+import Customise from "./Components/Customise.jsx";
 import Profile from "./Components/Profile.jsx";
 import Channel from "./Components/Channel.jsx";
 
@@ -57,6 +57,10 @@ const router = createBrowserRouter([
   {
     path: "/my-profile",
     element: <Profile />,
+  },
+  {
+    path: "/my-profile/customise",
+    element: <Customise />,
   },
 ]);
 

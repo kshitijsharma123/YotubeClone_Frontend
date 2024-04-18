@@ -1,5 +1,4 @@
-import { useRef, useState, useReducer } from "react";
-
+import { useRef, useState, useReducer, useContext } from "react";
 
 import { LoadingCircle } from "./HomePage.jsx";
 
@@ -9,8 +8,13 @@ import { AiFillSound } from "react-icons/ai";
 import { IoVolumeMute } from "react-icons/io5";
 import { MdFullscreen } from "react-icons/md";
 
-function VidoPlayer({ data,isLoading }) {
-  
+import { convertDuration } from "../utils/utilFunctions.js";
+import userDataContext from "../context/userContext.js";
+
+function VidoPlayer({ data, isLoading }) {
+  const id = data?._id;
+  const { incrementView } = useContext(userDataContext);
+
   const videoRef = useRef(null);
   const volumeRef = useReducer(null);
   const seekBarRef = useRef(null);
@@ -20,7 +24,7 @@ function VidoPlayer({ data,isLoading }) {
   const [videoMute, setVideoMute] = useState(false);
   const [currentTime, setCurrentTime] = useState(Number);
   const [overMute, setOverMute] = useState(false);
-  // useEffect(() => {
+  const [addViewCount, setAddViewCount] = useState(0);
 
   const toggleFullScreen = () => {
     if (!document.fullscreenElement) {
@@ -70,16 +74,10 @@ function VidoPlayer({ data,isLoading }) {
     }
   };
 
-  // Fetch video from the backdend Server
+  // Fetch video from the backend Server
 
   if (isLoading) {
     return <LoadingCircle />;
-  }
-
-  function convertDuration(seconds) {
-    var minutes = Math.floor(seconds / 60);
-    var remainingSeconds = Math.floor(seconds % 60);
-    return { minutes: minutes, seconds: remainingSeconds };
   }
 
   const handleOnloadedData = (e) => {
@@ -87,29 +85,35 @@ function VidoPlayer({ data,isLoading }) {
     setDurration(duration);
   };
 
-  const handleTimeUpdate = () => {
+  const handleTimeUpdate = async () => {
     let cTime = convertDuration(videoRef.current.currentTime);
+
+    if (
+      videoRef.current?.duration * 0.1 < videoRef.current.currentTime &&
+      addViewCount === 0
+    ) {
+      await incrementView(id);
+
+      setAddViewCount(1);
+    }
 
     if (seekBarRef.current) {
       const per =
         (videoRef.current.currentTime / videoRef.current.duration) * 100;
-      console.log(per);
       seekBarRef.current.style.width = `${per}%`;
     }
+
     setCurrentTime(cTime);
   };
-
-
 
   const handleSeek = (e) => {
     if (videoRef.current && seekBarRef.current) {
       const seekBarRect = seekBarRef.current.getBoundingClientRect();
-      const clickX = e.clientX - seekBarRect.left; 
+      const clickX = e.clientX - seekBarRect.left;
       const per = (clickX / seekBarRect.width) * 100;
       const duration = videoRef.current.duration;
       const newTime = (per / 100) * duration;
       videoRef.current.currentTime = newTime;
-      console.log({ newTime });
     }
   };
 

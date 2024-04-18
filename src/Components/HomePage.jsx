@@ -45,6 +45,8 @@ function HomePage() {
                 username={v.owner.username}
                 thumbnail={v.thumbnail}
                 channelImage={v.owner.avatar}
+                views={v.views}
+                duration={v.duration}
               />
             </Link>
           </div>

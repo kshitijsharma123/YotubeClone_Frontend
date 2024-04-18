@@ -168,6 +168,15 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
+  const incrementView = async (videoId) => {
+    try {
+      console.log(videoId);
+      await axios.get(`${baseULR}videos/view/${videoId}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <userDataContext.Provider
       value={{
@@ -179,7 +188,8 @@ export const UserContextProvider = ({ children }) => {
         logoutStatus,
         registration,
         getVideoByUser,
-        userVideos
+        userVideos,
+        incrementView,
       }}
     >
       {children}

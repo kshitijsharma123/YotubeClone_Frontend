@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import userDataContext from "../context/userContext";
 import Headers from "./../Header/Header";
 import { CiEdit } from "react-icons/ci";
+import { Link } from "react-router-dom";
 
 export default function Profile() {
   const { getUser, user, getVideoByUser, userVideos } =
@@ -54,9 +55,9 @@ export default function Profile() {
           <div className="ml-5 mt-6 flex flex-col">
             <h1 className="font-bold text-4xl pr-2">{fullName}</h1>
             <div className="flex  gap-2">
-              <h4 className="font-semibold text-l ">{username}</h4>
+              <h4 className="font-semibold text-l pl-2 ">{username}</h4>
               {/* Dot is the below h6 tag */}
-              <h6 className=" font-light">‧</h6>
+              <h6 className=" font-light"> ‧ </h6>
               <h6 className=" font-light">
                 {userVideos.numberOfvideo === 1
                   ? "1 video"
@@ -64,15 +65,11 @@ export default function Profile() {
               </h6>
             </div>
             <div className="mt-5 flex gap-4">
-              <div
-                className=" flex items-center justify-center h-10 w-32 border-1.5 rounded-2xl text-white font-semibold pb-1 bg-slate-400
-                
-                hover:bg-white 
-              hover:opacity-30 hover:text-black
-              "
-              >
-                Customise
-              </div>
+              <Link to="/my-profile/customise">
+                <button className="w-auto h-12 bg-slate-500 bg-opacity-70 hover:bg-opacity-100 p-2 rounded-xl font-semibold hover:font-bold">
+                  Customise
+                </button>
+              </Link>
             </div>
           </div>
         </div>

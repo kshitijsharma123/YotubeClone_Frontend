@@ -13,7 +13,7 @@ function Watch() {
     queryFn: () => getVideoById(videoId),
     queryKey: ["Videos"],
   });
-console.log(data)
+
   return (
     <>
       <Headers />
