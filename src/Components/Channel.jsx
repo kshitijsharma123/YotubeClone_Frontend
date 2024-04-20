@@ -1,7 +1,9 @@
-import React from 'react'
+import Headers from "./../Header/Header";
 
 export default function Channel() {
   return (
-    <div className='text-white' >Channel</div>
-  )
+    <div className="text-white">
+      <Headers />
+    </div>
+  );
 }

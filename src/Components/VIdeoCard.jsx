@@ -18,7 +18,6 @@ function VideoCard(props) {
 
   const view = abberviateViewCount(views);
 
-
   return (
     <>
       <div className="  h-60 w-100 rounded-xl flex flex-col mb-3 ">

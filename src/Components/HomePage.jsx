@@ -23,9 +23,9 @@ function HomePage() {
   if (isLoading) {
     return <LoadingCircle />;
   }
-  console.log(error);
-
+  
   if (error) {
+    console.log(error);
     return (
       <div className="text-white text-2xl flex justify-center">
         Network Error

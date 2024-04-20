@@ -26,6 +26,11 @@ export const UserContextProvider = ({ children }) => {
   });
   const [logoutStatus, setlogoutStatus] = useState();
 
+  const [likeStatus, setLikeStatus] = useState({
+    isLiked: Boolean,
+    likeCound: Number,
+  });
+
   const login = async (data, password) => {
     try {
       const res = await axios.post(
@@ -170,10 +175,22 @@ export const UserContextProvider = ({ children }) => {
 
   const incrementView = async (videoId) => {
     try {
-      console.log(videoId);
       await axios.get(`${baseULR}videos/view/${videoId}`);
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const islikedAndLikeCount = async (videoId) => {
+    console.log("working");
+    try {
+      const res = await axios.get(`${baseULR}like/isLiked/${videoId}`, {
+        withCredentials: true,
+      });
+      console.log(res.status);
+      const a = res.data.data;
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -190,6 +207,7 @@ export const UserContextProvider = ({ children }) => {
         getVideoByUser,
         userVideos,
         incrementView,
+        islikedAndLikeCount,
       }}
     >
       {children}

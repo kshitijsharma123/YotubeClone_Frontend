@@ -18,8 +18,10 @@ export const getVideoById = async (id) => {
   try {
     const res = await axios.get(`http://localhost:8000/api/v1/videos/v/${id}`);
 
+    // const videoData = res.data.data.video;
     const videoData = res.data.data;
-  
+//     const likeCount = res.data.data.likeCount;
+// likeCount
     return videoData;
   } catch (error) {
     console.log(error);
