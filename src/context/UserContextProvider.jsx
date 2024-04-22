@@ -28,7 +28,12 @@ export const UserContextProvider = ({ children }) => {
 
   const [likeStatus, setLikeStatus] = useState({
     isLiked: Boolean,
-    likeCound: Number,
+    isDisliked: Boolean,
+    likeCount: Number,
+    error: {
+      status: Number,
+      message: "",
+    },
   });
 
   const login = async (data, password) => {
@@ -182,15 +187,84 @@ export const UserContextProvider = ({ children }) => {
   };
 
   const islikedAndLikeCount = async (videoId) => {
-    console.log("working");
     try {
       const res = await axios.get(`${baseULR}like/isLiked/${videoId}`, {
         withCredentials: true,
       });
-      console.log(res.status);
-      const a = res.data.data;
-    } catch (err) {
-      console.error(err);
+      if (res.status === 200) {
+        console.log(res.data.data);
+        const { Liked, likeCount, Disliked } = res.data.data;
+        setLikeStatus({
+          isLiked: Liked,
+          isDisliked: Disliked,
+          likeCount: likeCount,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      if (error.message.status >= 400) {
+        setLikeStatus((prev) => ({
+          ...prev,
+          error: {
+            status: error.response.status,
+            message: error.response.statusText,
+          },
+        }));
+      }
+    }
+  };
+
+  const toggleLike = async (videoId) => {
+    try {
+      const res = await axios.post(
+        `${baseULR}like/video/${videoId}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (res.status === 200) {
+        const { likeCount, liked } = res.data.data;
+        console.log(res.data.data);
+
+        setLikeStatus({
+          isLiked: liked,
+          isDisliked: false,
+          likeCount: likeCount,
+        });
+      }
+    } catch (error) {
+      console.log(error.response);
+      if (error.message.status >= 400) {
+        setLikeStatus((prev) => ({
+          ...prev,
+          error: {
+            status: error.response.status,
+            message: error.response.statusText,
+          },
+        }));
+      }
+    }
+  };
+
+  const toggleDislike = async (videoId) => {
+    try {
+      const res = await axios.post(
+        `${baseULR}dislike/video/${videoId}`,
+        {},
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        console.log({ Dislike: res.data.data });
+        const { likeCount, disliked } = res.data.data;
+        setLikeStatus({
+          isLiked: false,
+          isDisliked: disliked,
+          likeCount: likeCount,
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -208,6 +282,9 @@ export const UserContextProvider = ({ children }) => {
         userVideos,
         incrementView,
         islikedAndLikeCount,
+        likeStatus,
+        toggleLike,
+        toggleDislike,
       }}
     >
       {children}
